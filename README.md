@@ -10,4 +10,13 @@ Enables AppDynamics correlation from Camel to Kafka to consumers
 3. Restart the Java Agent process.
 4. Watch as you see the correlation in the AppDynamics controller (Can take up to 5 minutes).
 
+## To add this to a running Docker container
+
+1. Copy https://github.com/appdynamicsdh/kafka-camel-correlation/blob/master/kafka-camel-correlation-1.0-SNAPSHOT.jar inside the container e.g. docker cp kafka-camel-correlation.jar {instanceId}:/opt/appdynamics/javaagent/verx.x.x.x/sdk-plugins
+2. Add -Dallow.unsigned.sdk.extension.jars=true to the java command line.
+3. docker stop
+4. docker start
+5. Watch as you see the correlation in the AppDynamics controller (Can take up to 5 minutes).
+
+
 ![Correlation Screenshot](https://github.com/appdynamicsdh/kafka-camel-correlation/blob/master/KafkaCamelCorrelation.png)
