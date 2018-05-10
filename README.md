@@ -10,3 +10,4 @@ Enables AppDynamics correlation from Camel to Kafka to consumers
 3. Restart the Java Agent process.
 4. Watch as you see the correlation in the AppDynamics controller (Can take up to 5 minutes).
 
+![alt text](http://url/to/img.png)
