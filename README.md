@@ -12,8 +12,9 @@ Enables AppDynamics correlation from Camel to Kafka to consumers
 
 ## To add this to a running Docker container
 
-1. Copy https://github.com/appdynamicsdh/kafka-camel-correlation/blob/master/kafka-camel-correlation-1.0-SNAPSHOT.jar inside the container e.g. 
-docker cp kafka-camel-correlation.jar {instanceId}:/opt/appdynamics/javaagent/verx.x.x.x/sdk-plugins
+Copy https://github.com/appdynamicsdh/kafka-camel-correlation/blob/master/kafka-camel-correlation-1.0-SNAPSHOT.jar inside the container 
+
+1. docker cp kafka-camel-correlation.jar {instanceId}:/opt/appdynamics/javaagent/verx.x.x.x/sdk-plugins
 2. Add -Dallow.unsigned.sdk.extension.jars=true to the java command line.
 3. docker stop
 4. docker start
