@@ -1,19 +1,19 @@
 package com.appdynamics;
 
 
-        import com.appdynamics.apm.appagent.api.ITransactionDemarcator;
-        import com.appdynamics.instrumentation.sdk.Rule;
-        import com.appdynamics.instrumentation.sdk.SDKClassMatchType;
-        import com.appdynamics.instrumentation.sdk.SDKStringMatchType;
-        import com.appdynamics.instrumentation.sdk.contexts.ISDKUserContext;
-        import com.appdynamics.instrumentation.sdk.template.AExit;
-        import com.appdynamics.instrumentation.sdk.toolbox.reflection.IReflector;
-        import com.appdynamics.instrumentation.sdk.toolbox.reflection.ReflectorException;
+import com.appdynamics.apm.appagent.api.ITransactionDemarcator;
+import com.appdynamics.instrumentation.sdk.Rule;
+import com.appdynamics.instrumentation.sdk.SDKClassMatchType;
+import com.appdynamics.instrumentation.sdk.SDKStringMatchType;
+import com.appdynamics.instrumentation.sdk.contexts.ISDKUserContext;
+import com.appdynamics.instrumentation.sdk.template.AExit;
+import com.appdynamics.instrumentation.sdk.toolbox.reflection.IReflector;
+import com.appdynamics.instrumentation.sdk.toolbox.reflection.ReflectorException;
 
-        import java.util.ArrayList;
-        import java.util.HashMap;
-        import java.util.List;
-        import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class KafkaProducerInstrumentation extends AExit {
 
@@ -21,6 +21,8 @@ public class KafkaProducerInstrumentation extends AExit {
     private static final String METHOD_TO_INSTRUMENT = "send";
     private IReflector getHeaders = null;
     private IReflector addHeader = null;
+    private IReflector topic = null;
+
     private boolean haveCorrelation = false;
 
     public KafkaProducerInstrumentation() {
@@ -33,6 +35,9 @@ public class KafkaProducerInstrumentation extends AExit {
         String[] types = new String[]{String.class.getCanonicalName(),"[B"};
 
         addHeader = getNewReflectionBuilder().invokeInstanceMethod("add", searchSuperClass, types)
+                .build();
+
+        topic = getNewReflectionBuilder().invokeInstanceMethod("topic", searchSuperClass)
                 .build();
 
     }
@@ -83,7 +88,8 @@ public class KafkaProducerInstrumentation extends AExit {
     @Override
     public Map<String, String> identifyBackend(Object invokedObject, String className, String methodName, Object[] paramValues, Throwable thrownException, Object returnValue, ISDKUserContext context) throws ReflectorException {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("Kafka", "TEST");
+        Object o = paramValues[0];
+        map.put("Kafka", topic.execute(o.getClass().getClassLoader(), o));
         return map;
     }
 
