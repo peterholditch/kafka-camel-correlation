@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/CamelCorrelation.iml" filepath="$PROJECT_DIR$/.idea/CamelCorrelation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kafka-camel-correlation.iml" filepath="$PROJECT_DIR$/kafka-camel-correlation.iml" />
     </modules>
   </component>
 </project>
