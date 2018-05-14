@@ -108,7 +108,7 @@ public class KafkaProducerInstrumentation extends AExit {
 
     @Override
     public boolean resolveToNode() {
-        return true;
+        return false;
     }
 
     @Override
